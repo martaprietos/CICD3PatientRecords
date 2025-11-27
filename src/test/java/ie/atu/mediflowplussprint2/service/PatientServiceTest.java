@@ -1,8 +1,7 @@
 package ie.atu.mediflowplussprint2.service;
 
-import ie.atu.mediflowplussprint2.Patient;
-import ie.atu.mediflowplussprint2.PatientRepository;
-import ie.atu.mediflowplussprint2.PatientService;
+import ie.atu.mediflowplussprint2.model.Patient;
+import ie.atu.mediflowplussprint2.repository.PatientRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -85,6 +84,13 @@ public class PatientServiceTest {
     }
 
     @Test
+    void updateNameFail() {
+        when(repo.findByPatientId("P1")).thenReturn(Optional.empty());
+        assertThrows(IllegalArgumentException.class,
+                () -> service.updateEmail("P1", "Marta"));
+    }
+
+    @Test
     void updateDOBSuccess() {
         Patient p = new Patient("P1", "Mike", "mike@atu.ie", "20-20-2000");
         when(repo.findByPatientId("P1")).thenReturn(Optional.of(p));
@@ -93,4 +99,13 @@ public class PatientServiceTest {
         assertTrue(updated.isPresent());
         assertEquals("20-02-1999", updated.get().getDOB());
     }
+
+    @Test
+    void updateDOBFail() {
+        when(repo.findByPatientId("P1")).thenReturn(Optional.empty());
+        assertThrows(IllegalArgumentException.class,
+                () -> service.updateEmail("P1", "20-02-1893"));
+    }
+
+
 }

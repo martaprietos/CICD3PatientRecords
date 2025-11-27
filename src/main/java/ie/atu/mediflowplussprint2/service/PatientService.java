@@ -1,5 +1,7 @@
-package ie.atu.mediflowplussprint2;
+package ie.atu.mediflowplussprint2.service;
 
+import ie.atu.mediflowplussprint2.repository.PatientRepository;
+import ie.atu.mediflowplussprint2.model.Patient;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
