@@ -1,4 +1,4 @@
-package ie.atu.mediflowplussprint2;
+package ie.atu.mediflowplussprint2.model;
 
 import jakarta.persistence.*;
 import lombok.*;
