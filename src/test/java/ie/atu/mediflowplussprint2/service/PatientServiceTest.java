@@ -1,8 +1,7 @@
 package ie.atu.mediflowplussprint2.service;
 
-import ie.atu.mediflowplussprint2.Patient;
-import ie.atu.mediflowplussprint2.PatientRepository;
-import ie.atu.mediflowplussprint2.PatientService;
+import ie.atu.mediflowplussprint2.model.Patient;
+import ie.atu.mediflowplussprint2.repository.PatientRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
