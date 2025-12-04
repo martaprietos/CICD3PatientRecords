@@ -14,22 +14,23 @@ public class PatientServiceTest {
 
     private PatientRepository repo;
     private PatientService service;
+    private Patient p;
 
     @BeforeEach
     void setup() {
         repo = mock(PatientRepository.class); //setup mock to prevent accessing the real databse
         service = new PatientService(repo); // inject the mocked repo into service
+        p = new Patient("P1", "Mike", "mike@atu.ie", "20-20-2000", "Male", "home", "phone", "mike");
     }
 
     @Test
     void createThenFindById() {
-        Patient p = new Patient("P1", "Paul", "paul@atu.ie", "02-02-2000", "Male", "home", "phone", "`mike");
         when(repo.save(p)).thenReturn(p); //when save called, return patient
         when(repo.findByUsername("P1")).thenReturn(Optional.of(p));//mock that when id is found, return patient information
         service.create(p);
         //test that patient info is actually returned
         Patient found = service.findByUsername("P1");
-        assertEquals("Paul", found.getName());
+        assertEquals("Mike", found.getName());
     }
 
     @Test
@@ -41,7 +42,6 @@ public class PatientServiceTest {
 
     @Test
     void deleteSuccess() {
-        Patient p = new Patient("P1", "Bob", "bob@atu.ie", "02-20-2000", "Male", "home", "phone", "`mike");
         when(repo.findByUsername("P1")).thenReturn(Optional.of(p));
         Patient deleted = service.delete("P1");
         verify(repo).delete(p);//make sure delete was called
@@ -57,7 +57,6 @@ public class PatientServiceTest {
 
     @Test
     void updateEmailSuccess() {
-        Patient p = new Patient("P1", "Bob", "bob@atu.ie", "02-02-2000", "Male", "home", "phone", "`mike");
         //mock finding and saving
         when(repo.findByUsername("P1")).thenReturn(Optional.of(p));
         when(repo.save(p)).thenReturn(p);//store then return
@@ -75,7 +74,6 @@ public class PatientServiceTest {
 
     @Test
     void updateNameSuccess() {
-        Patient p = new Patient("P1", "Mike", "mike@atu.ie", "02-02-2000", "Male", "home", "phone", "`mike");
         when(repo.findByUsername("P1")).thenReturn(Optional.of(p));
         when(repo.save(p)).thenReturn(p);
         Optional<Patient> updated = service.updateName("P1", "NewName");
@@ -92,7 +90,6 @@ public class PatientServiceTest {
 
     @Test
     void updateDOBSuccess() {
-        Patient p = new Patient("P1", "Mike", "mike@atu.ie", "20-20-2000", "Male", "home", "phone", "`mike");
         when(repo.findByUsername("P1")).thenReturn(Optional.of(p));
         when(repo.save(p)).thenReturn(p);
         Optional<Patient> updated = service.updateDOB("P1", "20-02-1999");
@@ -106,4 +103,21 @@ public class PatientServiceTest {
         assertThrows(IllegalArgumentException.class,
                 () -> service.updateEmail("P1", "20/6/2009"));
     }
+
+    @Test
+    void updateGenderSuccess() {
+        when(repo.findByUsername("P1")).thenReturn(Optional.of(p));
+        when(repo.save(p)).thenReturn(p);
+        Optional<Patient> updated = service.updateDOB("P1", "20-02-1999");
+        assertTrue(updated.isPresent());
+        assertEquals("20-02-1999", updated.get().getDOB());
+    }
+
+    @Test
+    void updateGenderFail(){
+        when(repo.findByUsername("P1")).thenReturn(Optional.empty());
+        assertThrows(IllegalArgumentException.class,
+                () -> service.updateGender("P1", "New"));
+    }
 }
+
