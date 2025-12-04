@@ -46,4 +46,11 @@ public class PatientService {
         repo.save(patient);//put person back into database
         return Optional.of(patient); //return patient information
     }
+
+    public Optional<Patient> updateGender(String user, String gender) {
+        Patient patient = repo.findByUsername(user).orElseThrow(() -> new IllegalArgumentException("Patient not found"));;
+        patient.setGender(gender);//use setter to change name
+        repo.save(patient);//put person back into database
+        return Optional.of(patient); //return patient information
+    }
 }
