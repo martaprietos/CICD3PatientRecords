@@ -84,6 +84,13 @@ public class PatientServiceTest {
     }
 
     @Test
+    void updateNameFail() {
+        when(repo.findByUsername("P1")).thenReturn(Optional.empty());
+        assertThrows(IllegalArgumentException.class,
+                () -> service.updateName("P1", "Marta"));
+    }
+
+    @Test
     void updateDOBSuccess() {
         Patient p = new Patient("P1", "Mike", "mike@atu.ie", "20-20-2000", "Male", "home", "phone", "`mike");
         when(repo.findByUsername("P1")).thenReturn(Optional.of(p));
@@ -91,5 +98,12 @@ public class PatientServiceTest {
         Optional<Patient> updated = service.updateDOB("P1", "20-02-1999");
         assertTrue(updated.isPresent());
         assertEquals("20-02-1999", updated.get().getDOB());
+    }
+
+    @Test
+    void updateDOBFail() {
+        when(repo.findByUsername("P1")).thenReturn(Optional.empty());
+        assertThrows(IllegalArgumentException.class,
+                () -> service.updateEmail("P1", "20/6/2009"));
     }
 }
