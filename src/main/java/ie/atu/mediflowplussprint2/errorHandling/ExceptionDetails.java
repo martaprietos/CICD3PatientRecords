@@ -25,4 +25,5 @@ public class ExceptionDetails {
     public void setFieldName(String fieldName) {
         this.fieldName = fieldName;
     }
+
 }

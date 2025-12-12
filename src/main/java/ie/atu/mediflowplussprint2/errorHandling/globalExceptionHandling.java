@@ -32,4 +32,5 @@ public class globalExceptionHandling {
         exceptionDetails.setFieldValue(de.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exceptionDetails);
     }
+
 }
