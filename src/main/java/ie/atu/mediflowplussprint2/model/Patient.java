@@ -29,7 +29,7 @@ public class Patient {
 
     @NotNull(message = "Date of birth cannot be empty")
     @Size(max = 40, min = 3)
-    @Past(message = "Date of birth must be past")
+    //@Past(message = "Date of birth must be past")
     @Pattern(regexp = "^\\d{2}/\\d{2}/\\d{4}$", message = "Date of birth must be in the format DD/MM/YYYY")
     private String DOB;
 
