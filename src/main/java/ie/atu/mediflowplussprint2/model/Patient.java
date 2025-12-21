@@ -15,34 +15,34 @@ public class Patient {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull(message = "Username cannot be empty")
-    @Size(max = 40, min = 3)
+    @Size(max = 40)
     private String username;
 
     @NotNull(message = "Name cannot be empty")
-    @Size(max = 40, min = 3)
+    @Size(max = 40)
     private String name;
 
     @NotNull(message = "Email cannot be empty")
-    @Size(max = 40, min = 3)
+    @Size(max = 40)
     @Email
     private String email;
 
     @NotNull(message = "Date of birth cannot be empty")
-    @Size(max = 40, min = 3)
+    @Size(max = 40)
     //@Past(message = "Date of birth must be past")
     @Pattern(regexp = "^\\d{2}/\\d{2}/\\d{4}$", message = "Date of birth must be in the format DD/MM/YYYY")
     private String DOB;
 
     @NotNull(message = "Gender cannot be empty")
-    @Size(max = 40, min = 3)
+    @Size(max = 40)
     private String gender;
 
     @NotNull(message = "Address cannot be empty")
-    @Size(max = 6, min = 4)
+    @Size(max = 40)
     private String address;
 
     @NotNull(message = "Phone cannot be empty")
-    @Size(max = 40, min = 3)
+    @Size(max = 40)
     @Pattern(
             regexp = "^[+]?\\d[\\d\\s-]{7,14}$",
             message = "Phone number format is invalid"
@@ -50,7 +50,7 @@ public class Patient {
     private String phone;
 
     @NotNull(message = "Doctor cannot be empty")
-    @Size(max = 40, min = 5)
+    @Size(max = 40)
     private String doctor;
 
     public String getUsername() {
