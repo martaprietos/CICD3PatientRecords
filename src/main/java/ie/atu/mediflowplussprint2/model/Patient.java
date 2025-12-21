@@ -13,7 +13,7 @@ import lombok.*;
 
 public class Patient {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull(message = "Username cannot be empty")
     @Size(max = 40, min = 3)
     private String username;
